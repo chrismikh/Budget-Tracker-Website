@@ -1,0 +1,130 @@
+body /* the base of everything */
+{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #121212;
+    margin: 0;
+}
+
+* 
+{
+    box-sizing: border-box;
+}
+
+/* Header */
+
+/* the background and div of header */
+.header 
+{
+    border: 1px solid red;
+    overflow: hidden;
+    background-color: #515151;
+    height: auto;
+    width: 100%;
+    padding: 25px;
+    margin-bottom: 0px;
+    font-family: Helvetica;
+}
+
+/* the text of logo "Budget Tracker" in header */
+.header a.logo 
+{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+/* when hovering over the logo "Budget Tracker" in header */
+.header a.logo:hover 
+{
+    background-color: #515151;
+    color: #DDDDDD;
+}
+
+/* right side of header */
+.header-right 
+{
+    float: right;
+    padding-right: 35px;
+}
+
+/* the text and buttons of Home, Contact and About buttons in header */
+.header a 
+{
+    float: left;
+    color: #DDDDDD;
+    text-align: center;
+    padding: 12px;
+    margin-left: 10px;
+    text-decoration: none;
+    font-size: 20px; 
+    line-height: 25px;
+    border-radius: 4px;
+}
+
+/* when hovering over the Home, Contact and About buttons in header */
+.header a:hover 
+{
+    background-color: #ddd;
+    color: black;
+}
+
+/* when Home, Contact or About buttons are pressed (active page) in header */
+.header a.active 
+{
+    background-color: dodgerblue;
+    color: white;
+}
+
+
+/* Main Content */
+
+/* the background and div of main content */
+.mainContent
+{
+    border: 1px solid red;
+    flex: 1;
+    overflow: hidden;
+    height: auto;
+    width: 100%;
+    padding: 25px;
+    margin-top: 0px;
+    font-family: Helvetica;
+}
+
+
+/* Footer */
+
+.footer 
+{
+    border: 1px solid red;
+    background-color: #515151; 
+    color: #DDDDDD; 
+    width: 100%; 
+    padding: 20px 0; 
+    text-align: center; 
+    font-size: 14px; 
+}
+
+/* Footer content */
+.footer-content {
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Footer links */
+.footer-links {
+    margin-top: 10px;
+}
+
+.footer-links a {
+    color: #DDDDDD;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+.footer-links a:hover {
+    color: dodgerblue;
+    text-decoration: underline;
+}
