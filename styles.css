@@ -12,6 +12,7 @@ body /* the base of everything */
     box-sizing: border-box;
 }
 
+
 /* Header */
 
 /* the background and div of header */
@@ -60,6 +61,7 @@ body /* the base of everything */
     font-size: 20px; 
     line-height: 25px;
     border-radius: 4px;
+    transition-duration: 0.4s;
 }
 
 /* when hovering over the Home, Contact and About buttons in header */
@@ -83,6 +85,7 @@ body /* the base of everything */
 .mainContent
 {
     border: 1px solid red;
+    position: relative;
     flex: 1;
     overflow: hidden;
     height: auto;
@@ -90,6 +93,139 @@ body /* the base of everything */
     padding: 25px;
     margin-top: 0px;
     font-family: Helvetica;
+}
+
+/* style for the overlay to disable clicks when the forms container is open */
+.mainContentOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    z-index: 1; /* Ensure it appears above .mainContent */
+    pointer-events: all; /* Blocks clicks */
+    display: none; /* Hidden by default */
+}
+
+/* add expense button */
+.addExpenseContainer
+{
+	border: 1px solid green;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Helvetica;
+}
+
+.addExpenseButton 
+{
+    border: none;
+    color: white;
+    background-color: #FFC107;
+    padding: 22px 40px;
+    transform: scale(1);
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.addExpenseButton:hover
+{
+    color: #CCCCCC;
+    background-color: #B37F04;
+    transform: scale(1.1);
+}
+
+.addExpenseButton:active {
+    background-color: #8D6D04;
+    color: #DDDDDD;
+    transform: scale(0.9); 
+}
+
+/* when the add expense button pressed, it opens this forms container */
+.expenseFormContainer
+{
+	border: 1px solid yellow;
+    background-color: white;
+    border-radius: 40px;
+    margin: 0 auto;
+    padding: 50px 15px;
+    position: absolute;
+    z-index: 2; /* ensure it appears above the overlay */
+    width: 30%;
+    top: 50px; 
+    left: 0; 
+    right: 0; 
+    bottom: 50px; 
+    justify-content: center;
+    display: flex;
+    font-family: Helvetica;
+    display: none; /* start hidden */
+    animation: slideUp 0.5s ease-in-out; /* apply the animation */
+}
+
+/* animation for forms container appearence */
+@keyframes slideUp {
+    from {
+        transform: translateY(100%); /* start below the viewport */
+        opacity: 0; 
+    }
+    to {
+        transform: translateY(0); /* move to its normal position */
+        opacity: 1; 
+    }
+}
+
+/* forms styling inside the forms container */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.cancelButton {
+    background-color: #f44336; 
+    color: white; 
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.cancelButton:hover {
+    background-color: #d32f2f;
 }
 
 
@@ -122,6 +258,7 @@ body /* the base of everything */
     text-decoration: none;
     margin: 0 10px;
     font-size: 14px;
+    transition-duration: 0.4s;
 }
 
 .footer-links a:hover {
