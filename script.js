@@ -1,5 +1,6 @@
 // button function when clicked on "Add Expense" button
-function addExpenseDisplay() {
+function addExpenseDisplay() 
+{
     var form = document.getElementById("expenseFormContainer");
     var overlay = document.getElementById("mainContentOverlay");
     form.style.display = "block"; // show the form
@@ -7,7 +8,8 @@ function addExpenseDisplay() {
 }
 
 // button function when clicked on "Cancel" button inside the forms container
-function closeExpenseForm() {
+function closeExpenseForm() 
+{
     var form = document.getElementById("expenseFormContainer");
     var overlay = document.getElementById("mainContentOverlay");
     form.style.display = "none"; // hide the form
@@ -15,8 +17,8 @@ function closeExpenseForm() {
 }
 
 // Storing the expenses forms data
-function submitExpenseForm(event) {
-    event.preventDefault(); // prevent page reload on form submission
+function submitExpenseForm(event) 
+{
 
     // get form values
     const type = document.querySelector('input[name="type"]:checked')?.value; // type, income or expense
@@ -26,17 +28,21 @@ function submitExpenseForm(event) {
     const description = document.getElementById("description").value.trim(); // description
 
     // validate the inputs
-    if (!type || !category || !amount || !date) {
+    if (!type || !category || !amount || !date) 
+    {
         alert("All fields are required!");
         return;
     }
-    if (isNaN(amount) || Number(amount) <= 0) {
+
+    if (isNaN(amount) || Number(amount) <= 0) 
+    {
         alert("Amount must be a positive number!");
         return;
     }
 
     // format the data
-    const expenseData = {
+    const expenseData = 
+    {
         type,
         category,
         amount: parseFloat(amount).toFixed(2), // ensure two decimal places
@@ -54,19 +60,23 @@ function submitExpenseForm(event) {
     closeExpenseForm();
 }
 
-function saveExpenseToLocalStorage(expense) {
+function saveExpenseToLocalStorage(expense) 
+{
     // retrieve existing expenses from local storage or initialize an empty array
     const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
     expenses.push(expense); // add the new expense
     localStorage.setItem("expenses", JSON.stringify(expenses)); // save back to local storage
 }
 
-function loadExpenses() {
+// Display Expenses
+function loadExpenses() 
+{
     const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
     const expenseList = document.getElementById("expenseList"); // add a container for the list in HTML
     expenseList.innerHTML = ""; // clear any existing content
 
-    expenses.forEach((expense, index) => {
+    expenses.forEach((expense, index) => 
+    {
         const item = document.createElement("div");
         item.className = "expense-item";
         item.innerHTML = `
