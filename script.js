@@ -1,24 +1,25 @@
-// button function when clicked on "Add Expense" button
-function addExpenseDisplay() 
+// button function when clicked on "Add Transaction" button
+function addTransactionDisplay() 
 {
-    var form = document.getElementById("expenseFormContainer");
+    var form = document.getElementById("transactionFormContainer");
     var overlay = document.getElementById("mainContentOverlay");
     form.style.display = "block"; // show the form
     overlay.style.display = "block"; // show the overlay
 }
 
 // button function when clicked on "Cancel" button inside the forms container
-function closeExpenseForm() 
+function closeTransactionForm() 
 {
-    var form = document.getElementById("expenseFormContainer");
+    var form = document.getElementById("transactionFormContainer");
     var overlay = document.getElementById("mainContentOverlay");
     form.style.display = "none"; // hide the form
     overlay.style.display = "none"; // hide the overlay
 }
 
-// Storing the expenses forms data
-function submitExpenseForm(event) 
+// Storing the transaction form data
+function submitTransactionForm(event) 
 {
+    event.preventDefault(); // prevent page reload on form submission
 
     // get form values
     const type = document.querySelector('input[name="type"]:checked')?.value; // type, income or expense
@@ -41,7 +42,7 @@ function submitExpenseForm(event)
     }
 
     // format the data
-    const expenseData = 
+    const transactionData = 
     {
         type,
         category,
@@ -51,39 +52,82 @@ function submitExpenseForm(event)
     };
 
     // store in local storage
-    saveExpenseToLocalStorage(expenseData);
+    saveTransactionToLocalStorage(transactionData);
 
     // clear the form
-    document.getElementById("expenseForm").reset();
+    document.getElementById("transactionForm").reset();
 
     // close the form and overlay
-    closeExpenseForm();
+    closeTransactionForm();
+
+    // refresh the transaction list when new transaction added
+    loadTransactions();
 }
 
-function saveExpenseToLocalStorage(expense) 
+function saveTransactionToLocalStorage(transaction) 
 {
-    // retrieve existing expenses from local storage or initialize an empty array
-    const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
-    expenses.push(expense); // add the new expense
-    localStorage.setItem("expenses", JSON.stringify(expenses)); // save back to local storage
+    // retrieve existing transactions from local storage or initialize an empty array
+    const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+    transactions.push(transaction); // add the new transaction
+    localStorage.setItem("transactions", JSON.stringify(transactions)); // save back to local storage
 }
 
-// Display Expenses
-function loadExpenses() 
+// Display Transactions
+function loadTransactions() 
 {
-    const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
-    const expenseList = document.getElementById("expenseList"); // add a container for the list in HTML
-    expenseList.innerHTML = ""; // clear any existing content
-
-    expenses.forEach((expense, index) => 
+    // display pictures/icons of categories
+    const categoryIcons = 
     {
+        restaurant: "pics/restaurant.png",
+        groceries: "pics/groceries.png",
+        transport: "pics/transport.png",
+        health: "pics/health.png",
+        gifts: "pics/gifts.png",
+        family: "pics/family.png",
+        shopping: "pics/shopping.png",
+        leisure: "pics/leisure.png",
+        default: "pics/default.png" // fallback image
+    };
+
+    const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+    const transactionList = document.getElementById("transactionList");
+    transactionList.innerHTML = "";
+
+    transactions.forEach((transaction) => 
+    {
+        // create a container for each transaction
         const item = document.createElement("div");
-        item.className = "expense-item";
+        item.className = "transaction-item"; // base class for all transactions
+
+        // add specific class based on the type
+        if (transaction.type === "income") // for income
+        {
+            item.classList.add("income-item");
+        } 
+        else if (transaction.type === "expense") // for expense
+        {
+            item.classList.add("transaction-item-specific");
+        }
+
+        // format the category to capitalize the first letter
+        const formattedCategory = transaction.category.charAt(0).toUpperCase() + transaction.category.slice(1);
+
+        // get the icon based on the category
+        const iconSrc = categoryIcons[transaction.category] || categoryIcons.default;
+
+        // add content to the item
         item.innerHTML = `
-            <p>${index + 1}. ${expense.type} - ${expense.category} - $${expense.amount} - ${expense.date} - ${expense.description}</p>
+            <img src="${iconSrc}" alt="${transaction.category}" />
+            <div>
+                <strong>${transaction.type.toUpperCase()}</strong> - ${formattedCategory} <br />
+                <strong>$${transaction.amount}</strong> - ${transaction.date} <br />
+                ${transaction.description}
+            </div>
         `;
-        expenseList.appendChild(item);
+
+        // append the item to the list
+        transactionList.appendChild(item);
     });
 }
 
-document.addEventListener("DOMContentLoaded", loadExpenses);
+document.addEventListener("DOMContentLoaded", loadTransactions);

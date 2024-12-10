@@ -18,11 +18,16 @@
 <!-- Main Content of the website -->
 <div class="mainContent">
     <div class="mainContentOverlay" id="mainContentOverlay"></div> <!-- the div that makes main content not clickable-->
-    <div class="addExpenseContainer"> <!-- opens the forms container -->
-        <button onclick="addExpenseDisplay()" class="addExpenseButton">Add Expense</button>
+    <div class="addTransactionContainer"> <!-- opens the forms container -->
+        <button onclick="addTransactionDisplay()" class="addTransactionButton">Add Transaction</button>
     </div>
-    <div id="expenseFormContainer" class="expenseFormContainer"> <!-- forms container -->
-        <form id="expenseForm" onsubmit="submitExpenseForm(event)">
+
+    <!-- display transactions -->
+    <p class="transactionsText">Transactions:</p>
+    <div id="transactionList" class="transaction-list"></div>
+
+    <div id="transactionFormContainer" class="transactionFormContainer"> <!-- forms container -->
+        <form id="transactionForm" onsubmit="submitTransactionForm(event)">
             <!-- Radio buttons for type selection -->
             <fieldset>
                 <legend>Transaction Type</legend>
@@ -58,7 +63,7 @@
             <br><br>
         
             <!-- Description input -->
-            <label for="description">Description:</label>
+            <label for="description">Description (optional):</label>
             <input type="text" id="description" name="description" placeholder="Enter a brief description">
             <br><br>
         
@@ -66,16 +71,10 @@
             <input type="submit" value="Submit">
 
             <!-- Cancel button -->
-            <button type="button" class="cancelButton" onclick="closeExpenseForm()">Cancel</button> <!-- closes the forms container-->
+            <button type="button" class="cancelButton" onclick="closeTransactionForm()">Cancel</button> <!-- closes the forms container-->
         </form>        
     </div>
-
-    <div id="expenseList">
-
-    </div> <!-- display expenses -->
-
 </div>
-
 
 <!-- Footer of the website -->
 <div class="footer">
@@ -88,7 +87,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="script.js"></script> <!-- script.js -->
 </body>

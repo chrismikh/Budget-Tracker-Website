@@ -13,12 +13,11 @@ body /* the base of everything */
 }
 
 
-/* Header */
+/* -- Header -- */
 
 /* the background and div of header */
 .header 
 {
-    border: 1px solid red;
     overflow: hidden;
     background-color: #515151;
     height: auto;
@@ -78,13 +77,11 @@ body /* the base of everything */
     color: white;
 }
 
-
-/* Main Content */
+/* -- Main Content -- */
 
 /* the background and div of main content */
 .mainContent
 {
-    border: 1px solid red;
     position: relative;
     flex: 1;
     overflow: hidden;
@@ -96,29 +93,40 @@ body /* the base of everything */
 }
 
 /* style for the overlay to disable clicks when the forms container is open */
-.mainContentOverlay {
+.mainContentOverlay 
+{
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-    z-index: 1; /* Ensure it appears above .mainContent */
-    pointer-events: all; /* Blocks clicks */
-    display: none; /* Hidden by default */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1; /* ensure it appears above .mainContent */
+    pointer-events: all; /* blocks clicks */
+    display: none;
 }
 
-/* add expense button */
-.addExpenseContainer
+/* 'transactions' text */
+.transactionsText
 {
-	border: 1px solid green;
+    color: #DDDDDD;
+    font-size: 20px;
+    font-weight: bold;
+    width: 8%;
+    position: absolute;
+    top: 25px;
+    left: 50px;
+}
+
+/* add transaction button */
+.addTransactionContainer
+{
     max-width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    font-family: Helvetica;
 }
 
-.addExpenseButton 
+.addTransactionButton 
 {
     border: none;
     color: white;
@@ -134,23 +142,23 @@ body /* the base of everything */
     transition-duration: 0.4s;
 }
 
-.addExpenseButton:hover
+.addTransactionButton:hover
 {
     color: #CCCCCC;
     background-color: #B37F04;
     transform: scale(1.1);
 }
 
-.addExpenseButton:active {
+.addTransactionButton:active 
+{
     background-color: #8D6D04;
     color: #DDDDDD;
     transform: scale(0.9); 
 }
 
-/* when the add expense button pressed, it opens this forms container */
-.expenseFormContainer
+/* when the add transaction button pressed, it opens this forms container */
+.transactionFormContainer
 {
-	border: 1px solid yellow;
     background-color: white;
     border-radius: 40px;
     margin: 0 auto;
@@ -161,28 +169,31 @@ body /* the base of everything */
     top: 50px; 
     left: 0; 
     right: 0; 
-    bottom: 50px; 
+    bottom: auto; 
     justify-content: center;
     display: flex;
-    font-family: Helvetica;
-    display: none; /* start hidden */
-    animation: slideUp 0.5s ease-in-out; /* apply the animation */
+    display: none;
+    animation: slideUp 0.5s ease-in-out;
 }
 
-/* animation for forms container appearence */
-@keyframes slideUp {
-    from {
+/* animation for forms container appearance */
+@keyframes slideUp 
+{
+    from 
+    {
         transform: translateY(100%); /* start below the viewport */
         opacity: 0; 
     }
-    to {
+    to 
+    {
         transform: translateY(0); /* move to its normal position */
         opacity: 1; 
     }
 }
 
 /* forms styling inside the forms container */
-label {
+label 
+{
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
@@ -191,7 +202,8 @@ label {
 input[type="text"],
 input[type="number"],
 input[type="date"],
-select {
+select 
+{
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
@@ -199,7 +211,8 @@ select {
     border-radius: 4px;
 }
 
-input[type="submit"] {
+input[type="submit"] 
+{
     background-color: #007bff;
     color: white;
     border: none;
@@ -209,11 +222,13 @@ input[type="submit"] {
     font-size: 16px;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover 
+{
     background-color: #0056b3;
 }
 
-.cancelButton {
+.cancelButton 
+{
     background-color: #f44336; 
     color: white; 
     border: none;
@@ -224,15 +239,55 @@ input[type="submit"]:hover {
     margin-left: 10px;
 }
 
-.cancelButton:hover {
+.cancelButton:hover 
+{
     background-color: #d32f2f;
 }
 
+/* transaction list */
+.transaction-item 
+{
+    display: flex;
+    align-items: center;
+    background-color: #1e1e1e;
+    color: #dddddd;
+    border: 1px solid #333333;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px; /* space between items */
+    font-family: Helvetica;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+    width: 25%;
+}
 
-/* Footer */
+.transaction-item img 
+{
+    width: 40px;
+    height: 40px;
+    margin-right: 15px; /* space between image and text */
+}
+
+/* specific styles for income */
+.income-item 
+{
+    border-left: 5px solid green;
+}
+
+/* specific styles for expense */
+.transaction-item-specific 
+{
+    border-left: 5px solid red;
+}
+
+.transaction-item:hover 
+{
+    background-color: #2a2a2a;
+}
+
+/* -- Footer -- */
 .footer 
 {
-    border: 1px solid red;
     background-color: #515151; 
     color: #DDDDDD; 
     width: 100%; 
@@ -241,18 +296,21 @@ input[type="submit"]:hover {
     font-size: 14px; 
 }
 
-/* Footer content */
-.footer-content {
+/* footer content */
+.footer-content 
+{
     margin: 0 auto;
     padding: 0 15px;
 }
 
-/* Footer links */
-.footer-links {
+/* footer links */
+.footer-links 
+{
     margin-top: 10px;
 }
 
-.footer-links a {
+.footer-links a 
+{
     color: #DDDDDD;
     text-decoration: none;
     margin: 0 10px;
@@ -260,7 +318,8 @@ input[type="submit"]:hover {
     transition-duration: 0.4s;
 }
 
-.footer-links a:hover {
+.footer-links a:hover 
+{
     color: dodgerblue;
     text-decoration: underline;
 }
