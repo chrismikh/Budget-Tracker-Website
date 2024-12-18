@@ -17,7 +17,8 @@
 
 <!-- Main Content of the website -->
 <div class="mainContent">
-    <div class="mainContentOverlay" id="mainContentOverlay"></div> <!-- the div that makes main content not clickable-->
+    <!-- Reusable Overlay -->
+    <div id="reusableOverlay" class="reusableOverlay"></div>
     <div class="addTransactionContainer"> <!-- opens the forms container -->
         <button onclick="addTransactionDisplay()" class="addTransactionButton">Add Transaction</button>
     </div>
@@ -25,6 +26,20 @@
     <!-- display transactions -->
     <p class="transactionsText">Transactions:</p>
     <div id="transactionList" class="transaction-list"></div>
+    
+    <!-- display detailed transaction -->>
+    <div id="transactionDetailsContainer" class="transactionDetailsContainer">
+        <div class="transactionDetailsContent">
+            <h2>Transaction Details</h2>
+            <p id="detailsType"><strong>Type:</strong> </p>
+            <p id="detailsCategory"><strong>Category:</strong> </p>
+            <p id="detailsAmount"><strong>Amount:</strong> </p>
+            <p id="detailsDate"><strong>Date:</strong> </p>
+            <p id="detailsDescription"><strong>Description:</strong> </p>
+            <button type="button" class="closeDetailsButton" onclick="closeTransactionDetails()">Close</button>
+        </div>
+    </div>
+    
 
     <div id="transactionFormContainer" class="transactionFormContainer"> <!-- forms container -->
         <form id="transactionForm" onsubmit="submitTransactionForm(event)">

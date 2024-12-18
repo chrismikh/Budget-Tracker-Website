@@ -1,19 +1,39 @@
+// Show the overlay behind the container (dynamic z-index for layering)
+function showOverlayFor(containerId) 
+{
+    const overlay = document.getElementById("reusableOverlay");
+    const targetContainer = document.getElementById(containerId);
+
+    // make the overlay visible
+    overlay.style.display = "block";
+
+    // adjust the z-index to place it just behind the target container
+    const containerZIndex = parseInt(window.getComputedStyle(targetContainer).zIndex, 10) || 100;
+    overlay.style.zIndex = containerZIndex - 1;
+}
+
+// Hide the overlay
+function hideOverlay() {
+    const overlay = document.getElementById("reusableOverlay");
+
+    // hide the overlay
+    overlay.style.display = "none";
+}
+
 // button function when clicked on "Add Transaction" button
 function addTransactionDisplay() 
 {
     var form = document.getElementById("transactionFormContainer");
-    var overlay = document.getElementById("mainContentOverlay");
     form.style.display = "block"; // show the form
-    overlay.style.display = "block"; // show the overlay
+    showOverlayFor("transactionFormContainer"); // Show overlay behind the form
 }
 
 // button function when clicked on "Cancel" button inside the forms container
 function closeTransactionForm() 
 {
     var form = document.getElementById("transactionFormContainer");
-    var overlay = document.getElementById("mainContentOverlay");
-    form.style.display = "none"; // hide the form
-    overlay.style.display = "none"; // hide the overlay
+    form.style.display = "none"; // Hide the form
+    hideOverlay(); // Hide the overlay
 }
 
 // Storing the transaction form data
@@ -120,14 +140,44 @@ function loadTransactions()
             <img src="${iconSrc}" alt="${transaction.category}" />
             <div>
                 <strong>${transaction.type.toUpperCase()}</strong> - ${formattedCategory} <br />
-                <strong>$${transaction.amount}</strong> - ${transaction.date} <br />
-                ${transaction.description}
+                <strong>$${transaction.amount}</strong> - ${transaction.date}
             </div>
         `;
+
+        // add a click event listener to display transaction details
+        item.addEventListener("click", () => showTransactionDetails(transaction));
 
         // append the item to the list
         transactionList.appendChild(item);
     });
+}
+
+function showTransactionDetails(transaction) 
+{
+    // format the type and category to capitalize the first letter
+    const formattedType = transaction.type.charAt(0).toUpperCase() + transaction.type.slice(1);
+    const formattedCategory = transaction.category.charAt(0).toUpperCase() + transaction.category.slice(1);
+
+    // populate the transaction details container
+    document.getElementById("detailsType").textContent = `Type: ${formattedType}`;
+    document.getElementById("detailsCategory").textContent = `Category: ${formattedCategory}`;
+    document.getElementById("detailsAmount").textContent = `Amount: $${transaction.amount}`;
+    document.getElementById("detailsDate").textContent = `Date: ${transaction.date}`;
+    document.getElementById("detailsDescription").textContent = `Description: ${transaction.description || " "}`;
+
+    // display the details container
+    const detailsContainer = document.getElementById("transactionDetailsContainer");
+    detailsContainer.style.display = "flex";
+
+    // show the overlay behind the details container
+    showOverlayFor("transactionDetailsContainer");
+}
+
+function closeTransactionDetails() 
+{
+    const detailsContainer = document.getElementById("transactionDetailsContainer");
+    detailsContainer.style.display = "none"; // hide the details container
+    hideOverlay(); // hide the overlay
 }
 
 document.addEventListener("DOMContentLoaded", loadTransactions);

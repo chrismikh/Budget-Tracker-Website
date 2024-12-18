@@ -92,20 +92,6 @@ body /* the base of everything */
     font-family: Helvetica;
 }
 
-/* style for the overlay to disable clicks when the forms container is open */
-.mainContentOverlay 
-{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1; /* ensure it appears above .mainContent */
-    pointer-events: all; /* blocks clicks */
-    display: none;
-}
-
 /* 'transactions' text */
 .transactionsText
 {
@@ -283,6 +269,60 @@ input[type="submit"]:hover
 .transaction-item:hover 
 {
     background-color: #2a2a2a;
+}
+
+.transactionDetailsContainer 
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2; /* Ensure it appears above other content */
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+}
+
+.transactionDetailsContent 
+{
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 30%;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    font-family: Helvetica;
+}
+
+.closeDetailsButton 
+{
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.closeDetailsButton:hover 
+{
+    background-color: #d32f2f;
+}
+
+/* Reusable Overlay */
+.reusableOverlay 
+{
+    position: fixed; /* covers the entire viewport */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+    z-index: 10; /* just below the modal */
+    display: none;
+    pointer-events: auto; /* blocks clicks behind */
 }
 
 /* -- Footer -- */
